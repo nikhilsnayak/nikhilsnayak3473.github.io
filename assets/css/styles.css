@@ -35,6 +35,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--clr-light);
   color: var(--clr-dark);
@@ -54,11 +58,6 @@ img {
 
 strong {
   font-weight: var(--fw-bold);
-}
-
-:focus {
-  outline: 3px solid var(--clr-accent);
-  outline-offset: 3px;
 }
 
 .btn {
@@ -122,8 +121,112 @@ h3 {
   padding: 0.25em 1em;
 }
 
-nav {
-  display: none;
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.nav {
+  position: fixed;
+  background: var(--clr-dark);
+  color: var(--clr-light);
+  inset: 0;
+  z-index: 100;
+  transform: translateX(100%);
+  transition: transform 250ms cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h2);
+  font-family: var(--ff-secondary);
+}
+
+.nav-link:hover {
+  color: var(--clr-accent);
+}
+
+.nav-toggle {
+  padding: 0.5em;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  position: absolute;
+  right: 2em;
+  top: 2em;
+  z-index: 1000;
+}
+
+.nav-open .nav {
+  transform: translateX(0);
+}
+
+.nav-open .nav-toggle {
+  position: fixed;
+}
+
+.nav-open .hamburger {
+  transform: rotate(0.625turn);
+}
+
+.nav-open .hamburger::after {
+  opacity: 0;
+}
+
+.nav-open .hamburger::before {
+  transform: rotate(90deg) translateX(-6px);
+}
+
+.hamburger {
+  display: block;
+  position: relative;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  background: var(--clr-dark);
+  width: 2em;
+  height: 3px;
+  border-radius: 1em;
+  transition: transform 250ms ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.hamburger::before {
+  top: 6px;
+}
+
+.hamburger::after {
+  bottom: 6px;
+}
+
+.nav-open .hamburger,
+.nav-open .hamburger::before {
+  background: var(--clr-accent);
+}
+
+.logo {
+  font-size: var(--fs-h2);
 }
 
 .intro {
@@ -214,17 +317,15 @@ nav {
 
 .project {
   min-width: 200px;
-  max-width: 200px;
   box-shadow: var(--bs);
   margin: 1em;
   padding: 1em;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   row-gap: 1em;
   background-color: var(--clr-dark);
-
   color: var(--clr-light);
 }
 
@@ -240,7 +341,6 @@ nav {
 @media (min-width: 600px) {
   .project {
     min-width: 300px;
-    max-width: 300px;
   }
 }
 
